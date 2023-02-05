@@ -11,11 +11,11 @@ then
   exit 1
 else
   echo "Cluster to use: $CLUSTER"
-  ls -f license.dat > /dev/null
+  ls -f license.dat >/dev/null 2>/dev/null
   if [ $? -ne 0 ]
+  then
 	echo "Cannot find license.dat in the current directory. Aborting."
 	exit 1  
-  then
   fi
   read -p "Press Return to continue... on Ctrl-C to abort."
 fi
