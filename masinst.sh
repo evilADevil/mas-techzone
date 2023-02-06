@@ -1,15 +1,16 @@
-#！ /bin/bash
+#!/bin/bash
 ## Check if we are logged in something
 echo "+------------------------------+"
 echo "| Script to install MAS Manage |"
 echo "+------------------------------+"
-CLUSTER=$(oc status | grep 'on server' | awk '{print $6}')
+CLUSTER=$(oc status >/dev/null 2>/dev/null)
 if [ $? -eq 1 ]
 then
   echo "You don't seem to be logged to a cluster."
   echo "Use \"oc login\" to login to a custer and then restart this script."
   exit 1
 else
+  CLUSTER=$(oc status | grep 'on server' | awk '{print $6}')
   echo "Cluster to use: $CLUSTER"
   ls -f license.dat >/dev/null 2>/dev/null
   if [ $? -ne 0 ]
@@ -27,7 +28,7 @@ POD=$(oc get pods | grep -i mas-devops-app | awk '{print $1}')
 ## Wait for 3 min for Pod to start up.
 retry=6
 echo "Waiting for 3 mins for the pod to run."
-while  ( [ $retry -gt 0 ] )
+while [ $retry -gt 0 ]
 do
     retry=`expr $retry - 1`
     str1=$( oc get pods -n mas-devops | grep -i mas-devops-app | grep -i 'running')
