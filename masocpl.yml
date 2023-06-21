@@ -1,11 +1,11 @@
 - hosts: localhost
   any_errors_fatal: true
   vars:
-    mongodb_storage_class: odf-lvm-vg1
+    mongodb_storage_class: lvms-vg1
     mongodb_storage_capacity_data: 5Gi
     mongodb_storage_capacity_logs: 2Gi
     mongodb_replicas: 1
-    mas_channel: 8.9.x
+    mas_channel: 8.10.x
     mas_workspace_name: "MAS Local"
     mas_instance_id: masdemo
     mas_workspace_id: maslocal
@@ -15,7 +15,7 @@
     bootstrap:
       license_id: <<your license id>>
       license_file: "/opt/app-root/src/masloc/license.dat"
-    uds_storage_class: odf-lvm-vg1
+    uds_storage_class: lvms-vg1
     uds_contact:
       email: 'nobody@nowhere.com'
       first_name: 'nobody'
@@ -25,11 +25,11 @@
 # Cannot set dbname due to a bug in create_ldap_user.yml
 #    db2_dbname: 'maxdb'
     
-    db2_data_storage_class: odf-lvm-vg1
-    db2_meta_storage_class: odf-lvm-vg1
-    db2_backup_storage_class: odf-lvm-vg1
-    db2_logs_storage_class: odf-lvm-vg1
-    db2_temp_storage_class: odf-lvm-vg1
+    db2_data_storage_class: lvms-vg1
+    db2_meta_storage_class: lvms-vg1
+    db2_backup_storage_class: lvms-vg1
+    db2_logs_storage_class: lvms-vg1
+    db2_temp_storage_class: lvms-vg1
     
     db2_data_storage_accessmode: ReadWriteOnce
     db2_meta_storage_accessmode: ReadWriteOnce
@@ -50,7 +50,7 @@
     db2_username: 'maximo'
     
     mas_app_id: 'manage'
-    mas_app_channel: 8.5.x
+    mas_app_channel: 8.6.x
     mas_app_upgrade_strategy: 'Manual'
 # This does not work at the moment and there is a workaround for it in the bat file
 #   a defect has been open and this file will be updated when it will be fixed
